@@ -37,12 +37,10 @@ function signUp() {
             password: password.value,
             confirmPassword: confirmPassword.value
         }
-        // console.log(myObj);
-        // registeredUser = [myObj];
-        // console.log(registeredUser);
         
-        registeredUser.push(myObj); //Add the text 'item1' to registeredUser
+        registeredUser.push(myObj); //Add the object(user details) to registeredUser
         localStorage.setItem('member', JSON.stringify(registeredUser));
+        
         signUpMessage.innerHTML = `
         <p id="success-msg">Sign up successful!!!</p>
         `
@@ -81,10 +79,10 @@ function login() {
 }
 
 let getter = "";
-// function getUserInfo() {
-//    getter = JSON.parse(localStorage.getItem('member'));
-//    console.log(getter);
-// }
-// getUserInfo();
+function getUserInfo() {
+   getter = JSON.parse(localStorage.getItem('member'));
+   console.log(getter);
+}
+getUserInfo();
 
 
