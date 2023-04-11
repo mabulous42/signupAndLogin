@@ -12,27 +12,20 @@
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: 70vh;
+    height: 100vh;
+    background-color: black;
+}
+
+.small{
+    background-color: white;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.048);
+    border-radius: 8px;
+    width: 30%;
+    /* height: 55vh; */
 }
 
 form {
     text-align: left;
-}
-
-.logo {
-    width: 150px;
-}
-
-.btn-div button {
-    width: 80px;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 1px solid orange;
-}
-
-.btn-div button:hover {
-    background-color: rgb(126, 149, 173);
 }
 
 .username-div {
@@ -41,12 +34,27 @@ form {
 
 #sign-up-box,
 #login-box {
-    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.048);
-    border-radius: 8px;
-    width: 350px;
+    width: 100%;
     text-align: left;
     padding-bottom: 20px;
     position: relative;
+}
+
+.registered{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.registered span{
+    cursor: pointer;
+    color: rgb(255, 166, 0)
+}
+
+.registered span:hover{
+    color: rgb(255, 187, 61);
 }
 
 .logo-div {
@@ -62,22 +70,20 @@ h2 {
     color: rgb(7, 1, 59);
 }
 
-.btn-div {
-    text-align: center;
-    padding: 10px 0 0 0;
-}
 
 .all-input {
-    /* background-color: red; */
-    width: 100%;
+    margin-top: 10px;
 }
 
 .all-input input {
     width: 93%;
-    padding: 8px;
+    padding: 13px 10px;
     margin-bottom: 10px;
     padding-left: 10px;
     outline: none;
+    border-radius: 12px;
+    border: 1px solid black;
+    font-size: 16px;
 }
 
 .input-div {

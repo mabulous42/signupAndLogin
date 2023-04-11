@@ -20,6 +20,8 @@ function signUpPage() {
 
 function signUp() {
     loadingL.style.display = "block";
+    document.getElementById("sign-up-box").style.display = "block";
+    document.getElementById("login-box").style.display = "none";
     setTimeout(() => {
         // document.getElementById("sign-up-box").style.display = "block";
         // document.getElementById("login-box").style.display = "none";
