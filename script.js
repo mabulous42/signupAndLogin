@@ -1,4 +1,4 @@
-document.getElementById("login-box").style.display = "none";
+document.getElementById("sign-up-box").style.display = "none";
 let loading = document.getElementById("loading-div");
 let loadingL = document.getElementById("loading-divL");
 let fullName = document.getElementById('f-name');
@@ -8,12 +8,12 @@ let password = document.getElementById('user-password');
 let confirmPassword = document.getElementById('confirm-password');
 let loginEmail = document.getElementById('login-email');
 let loginPassword = document.getElementById('login-password');
+let loginMessage = document.getElementById('login-msg');
 
 loading.style.display = "none";
 loadingL.style.display = "none";
 
 function loginPage() {
-
     document.getElementById("sign-up-box").style.display = "none";
     document.getElementById("login-box").style.display = "block";
 }
@@ -81,25 +81,36 @@ function login() {
     setTimeout(() => {
         loading.style.display = "none";
 
-        let registeredUsers = JSON.parse(localStorage.getItem('member'));
-        console.log("User info: " + registeredUsers.fullName);
-
-        let authorizedUser = registeredUsers.find((user) => user.email === loginEmail.value);
+        let authorizedUser = registeredUser.find((user) => user.email === loginEmail.value && user.password === loginPassword.value);
+        let userNotFound = registeredUser.find((user) => user.email !== loginEmail.value && user.password !== loginPassword.value);
+        let emailOrPass = registeredUser.find((user) => user.email !== loginEmail.value || user.password !== loginPassword.value);
         console.log("You are authorized: " + authorizedUser);
 
         if (authorizedUser) {
-            // Redirect to the dashboard page
+            // logging in to dashboard
             window.location.href = "dashboard.html";
 
             window.localStorage.setItem('currentUser', JSON.stringify(authorizedUser));
-        } else {
-            logInMessage.innerHTML = `
-              <p id="failed-msg">Login failed! Please check your email and password.</p>
-            `;
+        } 
+        else if (userNotFound) {
+            loginMessage.innerHTML = `
+              <p id="login-failed-msg">User Not Found</p>
+            `
             setTimeout(() => {
-                logInMessage.style.display = "none";
+                loginMessage.style.display = "none";
             }, 3000);
         }
+        else if (emailOrPass) {
+            loginMessage.innerHTML = `
+                  <p id="login-failed-msg">Incorrect email or password.</p>
+                `
+            setTimeout(() => {
+                loginMessage.style.display = "none";
+            }, 3000);
+        } 
+
+        
+
 
     }, 3000);
 }

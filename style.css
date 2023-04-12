@@ -159,12 +159,14 @@ animation: spin 2s linear infinite;
 }
 
 #success-msg,
-#failed-msg{
+#failed-msg,
+#login-failed-msg{
     color: green;
     text-align: center;
     margin-bottom: 10px;
 }
 
-#failed-msg{
+#failed-msg,
+#login-failed-msg{
     color: red;
 }
