@@ -78,11 +78,12 @@ function login() {
     }, 3000);
 }
 
-let getter = "";
+let getter = [];
 function getUserInfo() {
    getter = JSON.parse(localStorage.getItem('member'));
    console.log(getter);
 }
 getUserInfo();
+
 
 
