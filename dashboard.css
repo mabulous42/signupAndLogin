@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+main{
+    position: relative;
+    padding: 20px;
+    background-color: rgb(51, 41, 41);
+    color: white;
+    height: 100vh;
+}
+
+#log-out-btn{
+    position: absolute;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: brown;
+    color: white;
+}

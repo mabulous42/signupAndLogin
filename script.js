@@ -6,6 +6,8 @@ let email = document.getElementById('user-email');
 let signUpMessage = document.getElementById('signup-msg');
 let password = document.getElementById('user-password');
 let confirmPassword = document.getElementById('confirm-password');
+let loginEmail = document.getElementById('login-email');
+let loginPassword = document.getElementById('login-password');
 
 loading.style.display = "none";
 loadingL.style.display = "none";
@@ -23,24 +25,30 @@ function signUpPage() {
 
 }
 
-let myObj;
 
 
-let registeredUser = []
+let registeredUser = JSON.parse(localStorage.getItem('member'));
 
 function signUp() {
     if (password.value === confirmPassword.value && fullName.value != "" && email.value != "") {
-        
-        myObj = {
+
+        let myObj = {
             fullname: fullName.value,
             email: email.value,
             password: password.value,
             confirmPassword: confirmPassword.value
         }
-        
-        registeredUser.push(myObj); //Add the object(user details) to registeredUser
-        localStorage.setItem('member', JSON.stringify(registeredUser));
-        
+        // console.log(myObj.fullname);
+        if (registeredUser == null) {
+            registeredUser = [];
+            registeredUser.push(myObj); //Add the object(user details) to registeredUser
+            localStorage.setItem('member', JSON.stringify(registeredUser));
+        } else {
+            registeredUser.push(myObj); //Add the object(user details) to registeredUser
+            localStorage.setItem('member', JSON.stringify(registeredUser));
+        }
+
+
         signUpMessage.innerHTML = `
         <p id="success-msg">Sign up successful!!!</p>
         `
@@ -58,32 +66,46 @@ function signUp() {
         confirmPassword.value = "";
     } else {
         signUpMessage.innerHTML = `
-        <p id="failed-msg">Sign up failed!!!</p>
+        <p id="failed-msg">Sign up failed!!!(Password does not matched)</p>
         `
         setTimeout(() => {
             signUpMessage.style.display = 'none';
         }, 3000);
     }
-
-
 }
+
 
 function login() {
     loading.style.display = "block";
+
     setTimeout(() => {
-        // document.getElementById("sign-up-box").style.display = "none";
-        // document.getElementById("login-box").style.display = "block";
         loading.style.display = "none";
+
+        let registeredUsers = JSON.parse(localStorage.getItem('member'));
+        console.log("User info: " + registeredUsers.fullName);
+
+        let authorizedUser = registeredUsers.find((user) => user.email === loginEmail.value);
+        console.log("You are authorized: " + authorizedUser);
+
+        if (authorizedUser) {
+            // Redirect to the dashboard page
+            window.location.href = "dashboard.html";
+
+            window.localStorage.setItem('currentUser', JSON.stringify(authorizedUser));
+        } else {
+            logInMessage.innerHTML = `
+              <p id="failed-msg">Login failed! Please check your email and password.</p>
+            `;
+            setTimeout(() => {
+                logInMessage.style.display = "none";
+            }, 3000);
+        }
 
     }, 3000);
 }
 
-let getter = [];
-function getUserInfo() {
-   getter = JSON.parse(localStorage.getItem('member'));
-   console.log(getter);
-}
-getUserInfo();
+
+
 
 
 
