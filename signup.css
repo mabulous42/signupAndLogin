@@ -40,6 +40,29 @@ form div:first-of-type {
     position: relative;
 }
 
+.show-hide-pass-btn{
+    position: absolute;
+    z-index: 10;
+    border: 1px solid #ccc;
+    background-color: #eceaea;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 15%;
+    cursor: pointer;
+}
+
+.eye{
+    font-size: 14px;
+}
+
+.password-length{
+    font-size: 11px;
+    text-align: center;
+    margin-top: -10px;
+    color: rgb(0, 89, 255);
+}
+
 input {
     width: 100%;
     padding: 10px;
@@ -106,6 +129,7 @@ button[type="submit"]:hover {
     color: green;
     text-align: center;
     margin-bottom: 10px;
+    font-size: 12px;
 }
 
 #failed-msg,
