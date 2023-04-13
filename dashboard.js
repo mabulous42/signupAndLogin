@@ -9,3 +9,16 @@ displayMessage.innerHTML = `
 function logOut(params) {
     window.location.href = "index.html";
 }
+
+// if (isset($_SESSION['email'])) {
+//     header("location:index.html");
+// }
+
+// session_start();
+// if (!isset($_SESSION['username'])) {
+//   //redirect to where people who are not logged in should be.
+//   window.location.href = "index.html";
+// } else {
+//   //access to the page.
+//   window.location.href = "dashboard.html";
+// }

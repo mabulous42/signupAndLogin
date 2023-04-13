@@ -22,7 +22,6 @@ function loginPage() {
 function signUpPage() {
     document.getElementById("sign-up-box").style.display = "block";
     document.getElementById("login-box").style.display = "none";
-
 }
 
 
@@ -66,8 +65,11 @@ function signUp() {
         confirmPassword.value = "";
     } else {
         signUpMessage.innerHTML = `
-        <p id="failed-msg">Sign up failed!!!(Password does not matched)</p>
+        <p id="failed-msg">Sign up failed!!!(Password does not matched) ${fullName}</p>
         `
+        signUpMessage.innerHTML = 
+        "<p id='failed-msg'>" + "Sign up failed!!!(Password does not matched)" + fullName + "</p>"
+        
         setTimeout(() => {
             signUpMessage.style.display = 'none';
         }, 3000);
@@ -91,7 +93,7 @@ function login() {
             window.location.href = "dashboard.html";
 
             window.localStorage.setItem('currentUser', JSON.stringify(authorizedUser));
-        } 
+        }
         else if (userNotFound) {
             loginMessage.innerHTML = `
               <p id="login-failed-msg">User Not Found</p>
@@ -107,16 +109,13 @@ function login() {
             setTimeout(() => {
                 loginMessage.style.display = "none";
             }, 3000);
-        } 
+        }
 
-        
+
 
 
     }, 3000);
 }
-
-
-
 
 
 
