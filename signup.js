@@ -9,8 +9,8 @@ let passShow = document.getElementById('pass-show');
 let c_hidePass = document.getElementById('c-pass-hide');
 let c_showPass = document.getElementById('c-pass-show');
 loading.style.display = "none";
-passHide.style.display = "none";
-c_hidePass.style.display = "none";
+// passHide.style.display = "none";
+// c_hidePass.style.display = "none";
 
 
 
@@ -19,8 +19,8 @@ function loginPage() {
 }
 
 
-let registeredUser = []
-registeredUser = JSON.parse(localStorage.getItem("all_users"));
+
+let registeredUser = JSON.parse(localStorage.getItem("allUsers"));
 
 function signUp(ev) {
     ev.preventDefault();
@@ -41,27 +41,45 @@ function signUp(ev) {
         if (registeredUser === null) {
             registeredUser = [];
             registeredUser.push(my_users);
-            localStorage.setItem("all_users", JSON.stringify(registeredUser));
+            localStorage.setItem("allUsers", JSON.stringify(registeredUser));
         } else {
             registeredUser.push(my_users);
-            localStorage.setItem("all_users", JSON.stringify(registeredUser));
+            localStorage.setItem("allUsers", JSON.stringify(registeredUser));
         }
         signUpMessage.innerHTML = `
             <p id="success-msg">Sign up successful!!!</p>
             `
-            loading.style.display = "block";
-    
-            setTimeout(() => {
-                window.location.href = "index.html";
-                loading.style.display = "none";
-                signUpMessage.style.display = 'none';
-            }, 3000);
-    
-            fullName.value = "";
-            email.value = "";
-            password.value = "";
-            confirmPassword.value = "";
-    }     
+        loading.style.display = "block";
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+            loading.style.display = "none";
+            signUpMessage.style.display = 'none';
+        }, 3000);
+
+        fullName.value = "";
+        email.value = "";
+        password.value = "";
+        confirmPassword.value = "";
+    }
+}
+
+function showPass() {
+    if (passShow.style.display = "block") {
+        password.type = "text";
+        passHide.style.display = "block";
+        passShow.style.display = "none";
+
+    } 
+}
+
+function hidePass() {
+    if (passShow.style.display = "none") {
+        password.type = "password";
+        passHide.style.display = "none";
+        passShow.style.display = "block";
+
+    }
 }
 
 

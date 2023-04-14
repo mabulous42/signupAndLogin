@@ -1,24 +1,15 @@
-let displayMessage = document.getElementById('welcome');
+let userName = document.getElementById('user-name');
 
-let loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+let loggedInUser = JSON.parse(localStorage.getItem("CU"));
+console.log(loggedInUser);
 
-displayMessage.innerHTML = `
-<h1>Hello, ${loggedInUser.fullname}!</h1>
-`
+userName.innerHTML = loggedInUser.fullname;
 
-function logOut(params) {
+
+if (!loggedInUser) {
     window.location.href = "index.html";
 }
-
-// if (isset($_SESSION['email'])) {
-//     header("location:index.html");
-// }
-
-// session_start();
-// if (!isset($_SESSION['username'])) {
-//   //redirect to where people who are not logged in should be.
-//   window.location.href = "index.html";
-// } else {
-//   //access to the page.
-//   window.location.href = "dashboard.html";
-// }
+function logOut() {
+    localStorage.removeItem("CU");
+    window.location.href = "index.html";
+}

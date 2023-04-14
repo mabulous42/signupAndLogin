@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="signup.css">
     <script src="https://kit.fontawesome.com/85310ecdcf.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <main>
         <form action="">
@@ -20,18 +22,19 @@
             </div>
             <div class="input-container">
                 <input type="password" name="" id="user-password" placeholder="Password" required>
-                <div class="show-hide-pass-btn">
+
+                <div class="show-div" onclick="showPass()">
+                    <!-- <i class="fa-solid fa-eye eye" id="pass-show"></i> -->
+                </div>
+                <div class="hide-div" onclick="hidePass()">
                     <i class="fa-solid fa-eye-slash eye" id="pass-hide"></i>
-                    <i class="fa-solid fa-eye eye" id="pass-show"></i>
-                </div>                
+                </div>
+
             </div>
             <div class="password-length">(Password must be at least 8 characters long)</div>
             <div class="input-container">
                 <input type="password" name="" id="confirm-password" placeholder="Confirm password" required>
-                <div class="show-hide-pass-btn">
-                    <i class="fa-solid fa-eye-slash eye" id="c-pass-hide"></i>
-                    <i class="fa-solid fa-eye eye" id="c-pass-show"></i>
-                </div>
+
             </div>
             <div>
                 <button type="submit" onclick="signUp(event)">Sign Up</button>
@@ -46,7 +49,8 @@
         </form>
     </main>
 
-    
+
     <script src="signup.js"></script>
 </body>
+
 </html>
