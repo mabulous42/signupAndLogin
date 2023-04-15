@@ -103,8 +103,10 @@ function like(index) {
     
 }
 
-function unlike(params) {
-    
+function unlike(index) {
+    removeItems(viewLikedPost, saveLikedPost, index);
+    localStorage.setItem("liked", JSON.stringify(saveLikedPost));
+    viewLiked();
 }
 
 function viewLiked() {
@@ -114,14 +116,14 @@ function viewLiked() {
     // displayMyContent(saveLikedPost, viewLikedPost);
 
     viewLikedPost.innerHTML = "";
-    saveLikedPost.forEach((element, index) => {
+    saveLikedPost.forEach((ele, index) => {
         viewLikedPost.innerHTML += `
         <div class='post-view-div mb-4'>
-            <h3 class='title'>${element.title}</h3>
-            <p class='my-content'>${element.content}</p>
-            <p>Author: ${element.author}</p>
-            <p>Time: ${element.time}</p>
-            <button id='like' class="remove btn btn-primary" type="submit" onclick="like(${index})">Unlike</button>
+            <h3 class='title'>${ele.title}</h3>
+            <p class='my-content'>${ele.content}</p>
+            <p>Author: ${ele.author}</p>
+            <p>Time: ${ele.time}</p>
+            <button id='like' class="remove btn btn-primary" type="submit" onclick="unlike(${index})">Unlike</button>
         </div>
         `
     });
@@ -135,9 +137,13 @@ function createPost() {
 
 }
 
+function removeItems(theHTMLTag, arrayElement, index) {
+    theHTMLTag.innerHTML = "";
+    arrayElement.splice(index, 1)
+}
+
 function del(index) {
-    viewPosts.innerHTML = "";
-    displayPost.splice(index, 1)
+    removeItems(viewPosts, displayPost, index);
     localStorage.setItem("Post", JSON.stringify(displayPost));
     displayMyContent(displayPost, viewPosts);
 }
