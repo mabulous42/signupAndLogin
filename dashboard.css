@@ -5,27 +5,32 @@
 }
 
 main{
-    padding: 20px;
     background-color: rgb(51, 41, 41);
     color: white;
     height: 100vh;
 }
 
-#log-out-btn{
-    right: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: rgb(235, 10, 10);
-    color: white;
+.site-heading{
+    text-align: center;
 }
 
-.container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.homepage{
+    height: 65vh;
+    overflow: auto;
 }
 
-#welcome{
-    /* background-color: red; */
+#publish-post{
+    background-color: red;
+    height: 100%;
+    top: 0;
 }
+
+.post-view-div{
+    box-shadow: 0 0 1px 3px rgba(128, 128, 128, 0.253);
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+

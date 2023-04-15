@@ -64,22 +64,22 @@ function signUp(ev) {
     }
 }
 
-function showPass() {
-    if (passShow.style.display = "block") {
-        password.type = "text";
-        passHide.style.display = "block";
-        passShow.style.display = "none";
+// function showPass() {
+//     if (passShow.style.display = "block") {
+//         password.type = "text";
+//         passHide.style.display = "block";
+//         passShow.style.display = "none";
 
-    } 
-}
+//     } 
+// }
 
-function hidePass() {
-    if (passShow.style.display = "none") {
-        password.type = "password";
-        passHide.style.display = "none";
-        passShow.style.display = "block";
+// function hidePass() {
+//     if (passShow.style.display = "none") {
+//         password.type = "password";
+//         passHide.style.display = "none";
+//         passShow.style.display = "block";
 
-    }
-}
+//     }
+// }
 
 
