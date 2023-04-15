@@ -90,9 +90,11 @@ function like(index) {
             saveLikedPost = [];
             saveLikedPost.unshift(displayPost[index]);
             localStorage.setItem("liked", JSON.stringify(saveLikedPost));
+            // viewLiked();
         } else {
             saveLikedPost.unshift(displayPost[index]);
             localStorage.setItem("liked", JSON.stringify(saveLikedPost));
+            // viewLiked();
         }
     } else {
         likeBtn.innerHTML = "Like";
@@ -101,11 +103,28 @@ function like(index) {
     
 }
 
+function unlike(params) {
+    
+}
+
 function viewLiked() {
     viewLikedPost.style.display = 'block';
     createPostSection.style.display = 'none';
     document.getElementById('vp').innerHTML = "View Posts";
-    displayMyContent(saveLikedPost, viewLikedPost);
+    // displayMyContent(saveLikedPost, viewLikedPost);
+
+    viewLikedPost.innerHTML = "";
+    saveLikedPost.forEach((element, index) => {
+        viewLikedPost.innerHTML += `
+        <div class='post-view-div mb-4'>
+            <h3 class='title'>${element.title}</h3>
+            <p class='my-content'>${element.content}</p>
+            <p>Author: ${element.author}</p>
+            <p>Time: ${element.time}</p>
+            <button id='like' class="remove btn btn-primary" type="submit" onclick="like(${index})">Unlike</button>
+        </div>
+        `
+    });
 
 }
 
