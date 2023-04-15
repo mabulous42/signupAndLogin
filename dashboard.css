@@ -19,10 +19,13 @@ main{
     overflow: auto;
 }
 
-#publish-post{
+#publish-post,
+#view-liked-post{
     background-color: red;
     height: 100%;
     top: 0;
+    left: 0;
+    overflow: auto;
 }
 
 .post-view-div{
