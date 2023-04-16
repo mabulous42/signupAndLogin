@@ -19,13 +19,25 @@ main{
     overflow: auto;
 }
 
+#post-title,
+#post-content{
+    background-color: rgb(57, 58, 59);
+    color: white;
+}
+
 #publish-post,
 #view-liked-post{
-    background-color: red;
+    background-color: black;
+    color: white;
     height: 100%;
     top: 0;
     left: 0;
     overflow: auto;
+}
+
+#view-liked-post{
+    background-color: white;
+    color: black;
 }
 
 .post-view-div{

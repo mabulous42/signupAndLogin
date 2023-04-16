@@ -76,7 +76,7 @@ function showAllPosts() {
     viewLikedPost.style.display = 'none';
     document.getElementById('vp').innerHTML = "All Posts"
     // displayMyContent(displayPost, viewPosts);
-    
+
 }
 
 let saveLikedPost = JSON.parse(localStorage.getItem("liked"));
@@ -98,9 +98,9 @@ function like(index) {
         }
     } else {
         likeBtn.innerHTML = "Like";
-        
+
     }
-    
+
 }
 
 function unlike(index) {
@@ -115,7 +115,7 @@ function viewLiked() {
     document.getElementById('vp').innerHTML = "View Posts";
     // displayMyContent(saveLikedPost, viewLikedPost);
 
-    viewLikedPost.innerHTML = "";
+    viewLikedPost.innerHTML = `<h1>Liked Posts</h1>`;
     saveLikedPost.forEach((ele, index) => {
         viewLikedPost.innerHTML += `
         <div class='post-view-div mb-4'>
@@ -143,10 +143,48 @@ function removeItems(theHTMLTag, arrayElement, index) {
 }
 
 function del(index) {
-    removeItems(viewPosts, displayPost, index);
-    localStorage.setItem("Post", JSON.stringify(displayPost));
-    displayMyContent(displayPost, viewPosts);
+    displayPost.forEach((ele) => {
+        let foundInLikePost = saveLikedPost.find((element) => element.content === ele.content);
+        // console.log(foundInLikePost);
+
+        if (foundInLikePost) {
+            removeItems(viewPosts, displayPost, index);
+            localStorage.setItem("Post", JSON.stringify(displayPost));
+            displayMyContent(displayPost, viewPosts);
+
+            removeItems(viewLikedPost, saveLikedPost, index);
+            localStorage.setItem("liked", JSON.stringify(saveLikedPost));
+            // viewLiked();
+        } else {
+            removeItems(viewPosts, displayPost, index);
+            localStorage.setItem("Post", JSON.stringify(displayPost));
+            displayMyContent(displayPost, viewPosts);
+        }
+    })
+
+    // console.log(foundInLikePost);
+
 }
+let v = document.getElementById("vp");
+let delButton = document.getElementById('remove');
+// if (!loggedInUser) {
+//     delButton.disabled = true;
+//     // v.disabled = true;
+// }
+
+console.log(loggedInUser.fullname);
+
+displayPost.forEach(element => {    
+    console.log(element.author);
+
+    if (loggedInUser.fullname === element.author) {
+        delButton.disabled = false;
+    } else {
+        delButton.disabled = true;
+    }
+
+    console.log(loggedInUser.fullname !== element.author);
+})
 
 
 
@@ -166,9 +204,9 @@ function del(index) {
 
 
 
-let delButton = document.getElementsByClassName('remove');
 
 
-// let v = document.getElementById("v");
+
+
 // v.disabled = true;
 
