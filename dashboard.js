@@ -19,7 +19,8 @@ console.log(loggedInUser);
 // console.log(!loggedInUser);
 
 //checking if there is no user currently on the site
-if (loggedInUser == null) {
+if (!loggedInUser) {
+    alert("You have to sign in before you can access this page, you will be redirected back to login page");
     window.location.href = "index.html";
 }else{
     userName.innerHTML = loggedInUser.fullname;
@@ -41,10 +42,12 @@ let displayPost = JSON.parse(localStorage.getItem("Post"));
 function publishPost() {
     createPostSection.style.display = 'none';
     myBlog = {
+        id: displayPost.length+1,
         title: postTitle.value,
         content: postContent.value,
         author: loggedInUser.fullname,
-        time: date
+        time: date,
+        isLiked: false
     }
 
     if (displayPost == null) {
@@ -61,23 +64,40 @@ function publishPost() {
 //this is a global function that handles display of post by being called by other fuctions that might need it
 function displayMyContent(arrayName, theHTMLTag) {
     theHTMLTag.innerHTML = "";
-    arrayName.forEach((element, index) => {
-        theHTMLTag.innerHTML += `
-        <div class='post-view-div mb-4'>
-            <h3 class='title'>${element.title}</h3>
-            <p class='my-content'>${element.content}</p>
-            <p>Author: ${element.author}</p>
-            <p>Time: ${element.time}</p>
-            <div class='d-flex'>
-                <button id='remove' class="remove btn btn-primary me-2" type="submit" onclick="del(${index})">Delete Post</button>            
-                <div>
-                    <input type="button" id='like' class="remove btn btn-primary" onclick="like(${index})" value="Like">
-                    <input type="button" id='unlike' class="remove btn btn-primary" onclick="unlike(${index})" value="Unlike">
-                </div>
+    if (displayPost == null) {
+        return;
+    } else {
+        arrayName.forEach((element, index) => {
+            theHTMLTag.innerHTML += `
+            <div>
+                <h3 class='title'>${element.title}</h3>
+                <p class='my-content'>${element.content}</p>
+                <p>Author: ${element.author}</p>
+                <p>Time: ${element.time}</p>                
             </div>
-        </div>
-        `
-    });
+            `
+            if (element.isLiked == true) {
+                theHTMLTag.innerHTML += `
+                <div class='d-flex'>
+                    <button id='remove' class="remove btn btn-primary me-2" type="submit" onclick="del(${index})">Delete Post</button>            
+                    <div>
+                        <input type="button" id='like' class="btn btn-primary" onclick="like(${element.id})" value="Unlike">
+                    </div>
+                </div>
+                `
+            } else {
+                theHTMLTag.innerHTML += `
+                <div class='d-flex'>
+                    <button id='remove' class="remove btn btn-primary me-2" type="submit" onclick="del(${index})">Delete Post</button>            
+                    <div>
+                        <input type="button" id='like' class="btn btn-primary" onclick="like(${element.id})" value="Like">
+                    </div>
+                </div>
+                `
+            }
+        });
+    }
+    
 }
 
 //calling the global function to display all the contents in the displayPost array
@@ -99,44 +119,55 @@ let saveLikedPost = JSON.parse(localStorage.getItem("liked"));
 let likeBtn = document.getElementById('like');
 let unlikeBtn = document.getElementById('unlike');
 
-//displaying none the unlike button until when it is needed
-unlikeBtn.style.display = "none";
 
 //the like function when clicked unshift the post to the top of the array
-function like(index) {
-    console.log(likeBtn.value);
-    if (likeBtn.value === "Like") {
-        // likeBtn.value = "Unlike";
-        likeBtn.style.display = "none";
-        unlikeBtn.style.display = "block";
-        if (saveLikedPost == null) {
-            saveLikedPost = [];
-            saveLikedPost.unshift(displayPost[index]);
-            localStorage.setItem("liked", JSON.stringify(saveLikedPost));
-            // viewLiked();
-        } else {
-            saveLikedPost.unshift(displayPost[index]);
-            localStorage.setItem("liked", JSON.stringify(saveLikedPost));
-            // viewLiked();
-        }
-    } else {
-        likeBtn.innerHTML = "Like";
-        saveLikedPost.splice(index, 1);
-        localStorage.setItem("liked", JSON.stringify(saveLikedPost));
+function like(id){
+    let found = displayPost.find(el=> el.id == id);
+    if(found.isLiked == false){
+        found.isLiked = true;
+        localStorage.setItem("Post", JSON.stringify(displayPost))
+        displayMyContent(displayPost, viewPosts);
+    }else{
+        found.isLiked = false;
+        localStorage.setItem("Post", JSON.stringify(displayPost))
+        displayMyContent(displayPost, viewPosts);
     }
-
+    console.log(found);
 }
+// function like(index) {
+//     console.log(likeBtn.value);
+//     if (likeBtn.value === "Like") {
+//         // likeBtn.value = "Unlike";
+//         // likeBtn.style.display = "none";
+//         // unlikeBtn.style.display = "block";
+//         if (saveLikedPost == null) {
+//             saveLikedPost = [];
+//             saveLikedPost.unshift(displayPost[index]);
+//             localStorage.setItem("liked", JSON.stringify(saveLikedPost));
+//             // viewLiked();
+//         } else {
+//             saveLikedPost.unshift(displayPost[index]);
+//             localStorage.setItem("liked", JSON.stringify(saveLikedPost));
+//             // viewLiked();
+//         }
+//     } else {
+//         likeBtn.innerHTML = "Like";
+//         saveLikedPost.splice(index, 1);
+//         localStorage.setItem("liked", JSON.stringify(saveLikedPost));
+//     }
 
-function unlike(index) {
-    // if (likeBtn.value === "Unlike") {
-    //     likeBtn.value = "Like"
-    // } else {
-    //     likeBtn.value = "Unlike"
-    // }
-    removeItems(viewLikedPost, saveLikedPost, index);
-    localStorage.setItem("liked", JSON.stringify(saveLikedPost));
-    viewLiked();
-}
+// }
+
+// function unlike(index) {
+//     // if (likeBtn.value === "Unlike") {
+//     //     likeBtn.value = "Like"
+//     // } else {
+//     //     likeBtn.value = "Unlike"
+//     // }
+//     removeItems(viewLikedPost, saveLikedPost, index);
+//     localStorage.setItem("liked", JSON.stringify(saveLikedPost));
+//     viewLiked();
+// }
 
 //displaying all the liked posts
 function viewLiked() {

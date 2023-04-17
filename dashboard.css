@@ -19,6 +19,10 @@ main{
     overflow: auto;
 }
 
+.box{
+    margin: 2px solid black;
+}
+
 #post-title,
 #post-content{
     background-color: rgb(57, 58, 59);
@@ -38,10 +42,6 @@ main{
 #view-liked-post{
     background-color: white;
     color: black;
-}
-
-.post-view-div{
-    box-shadow: 0 0 1px 3px rgba(128, 128, 128, 0.253);
 }
 
 ::-webkit-scrollbar{
