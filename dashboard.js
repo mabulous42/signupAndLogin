@@ -15,13 +15,14 @@ viewLikedPost.style.display = 'none';
 let loggedInUser = JSON.parse(localStorage.getItem("CU"));
 console.log(loggedInUser);
 
-userName.innerHTML = loggedInUser.fullname;
 
 // console.log(!loggedInUser);
 
 //checking if there is no user currently on the site
-if (!loggedInUser) {
+if (loggedInUser == null) {
     window.location.href = "index.html";
+}else{
+    userName.innerHTML = loggedInUser.fullname;
 }
 
 //log out function
